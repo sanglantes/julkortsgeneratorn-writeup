@@ -69,5 +69,5 @@ Skriv in ditt namn:
 > /flag.txt
 SSM{m1n1m4l15715k_p47chn1n6}
 ```
-## Summary
+## Closing remarks
 All in all, this challenge was a blast. A common pitfall is forgetting the slash in `/flag.txt`. I thought this challenge contained a perfect blend between pwn and reverse engineering. 
