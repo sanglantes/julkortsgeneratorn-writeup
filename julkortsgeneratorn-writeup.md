@@ -40,9 +40,9 @@ How lovely! It seems that the program generates Christmas cards with your name o
 Let's begin with opening the binary in Binary Ninja to further our understanding of how this works. Ignoring standard library function, we see that the **service** contains only a `main` function. It reads 40 bytes from `stdin`, storing it in `var_858`. Later, the binary calls `fread` and `fopen`, obvious suspects for potential attack vectors. `fopen` seems to point to a character array with the hard-coded value of `./card_template.txt`. Wouldn't it be something if we could change that to point to `flag.txt`?
 <img src="binja1.png"></img><br>
 <img src="name_str.png"></img>
-Name string<br>
+<br>Name string<br>
 <img src="fread_call.png"></img>
-`fread` parameters showing pointer to `fopen`.
+<br>`fread` parameters showing pointer to `fopen`.
 ### Patching
 The rules have been established. You're only allowed to patch a single byte. That eliminates the possibility of manipulating the string `./card_template.txt`. Let's take a look at the assembly. Binary Ninja has been so kind to label the variables for us. From the get-go, it's possible to deduce that the user-supplied name is at an offset of `-850` bytes from the base pointer. Moving on to the string holding `./card_template.txt`, that has an offset of `-870` bytes from `rbp`. Now, let's try changing the pointer in `fopen` to the user-supplied input. To do this, simply change the offset from `-870` to `-850`. I'll save this as `service_patched`.
 
