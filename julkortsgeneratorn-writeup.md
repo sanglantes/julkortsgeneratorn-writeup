@@ -42,12 +42,12 @@ Let's begin with opening the binary in Binary Ninja to further our understanding
 <img src="name_str.png"></img>
 <br>Name string<br>
 <img src="fread_call.png"></img>
-<br>`fread` parameters showing pointer to `fopen`.
+<br>`fread` parameters showing pointer to the constant string in `fopen`.
 ### Patching
-The rules have been established. You're only allowed to patch a single byte. That eliminates the possibility of manipulating the string `./card_template.txt`. Let's take a look at the assembly. Binary Ninja has been so kind to label the variables for us. From the get-go, it's possible to deduce that the user-supplied name is at an offset of `-850` bytes from the base pointer. Moving on to the string holding `./card_template.txt`, that has an offset of `-870` bytes from `rbp`. Now, let's try changing the pointer in `fopen` to the user-supplied input. To do this, simply change the offset from `-870` to `-850`. I'll save this as `service_patched`.
+The rules have been established. You're only allowed to patch a single byte. That eliminates the possibility of manipulating the string `./card_template.txt`. Let's take a look at the assembly. Binary Ninja has been so kind to label the variables for us. From the get-go, it's possible to deduce that the user-supplied name is at an offset of `-850` bytes from the base pointer. Moving on to the string holding `./card_template.txt`, that has an offset of `-870` bytes from `rbp`. Now, let's try changing the pointer in `fopen` to the user-supplied input. To do this, simply change the offset from `-870` to `-850`. I'll save this as `service_patch`.
 
 ```
-$ ./service_patched
+$ ./service_patch
 Skriv in ditt namn:
 > test.txt
 This is a test!
