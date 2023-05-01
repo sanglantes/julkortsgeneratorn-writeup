@@ -57,7 +57,7 @@ The patch seems to work, we're almost done. Using a utility such as vbindiff, we
 $ vbindiff service service_patch
 ```
 <img src="vbindiff.png"></img>
-`vbindiff` indicates a one byte difference between the two. The fourth byte at address `0x12F0` has been changed from `0x90` to `0xB0`. Jackpot! Let's plop those values in and see what we get.
+vbindiff indicates a one byte difference between the two. The fourth byte at address `0x12F0` has been changed from `0x90` to `0xB0`. Jackpot! Let's plop those values in and see what we get.
 ```
 $ nc localhost 5000
 Vilken byte vill du patcha? (i hex)
